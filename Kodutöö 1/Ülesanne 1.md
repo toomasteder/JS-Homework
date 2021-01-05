@@ -33,6 +33,7 @@ A variable declared outside a function, becomes GLOBAL - A global variable has g
         },
     ]
 }
+
 8. AJAX is a technique for creating fast and dynamic web pages. AJAX allows web pages to be updated asynchronously by exchanging small amounts of data with the server behind the scenes. This means that it is possible to update parts of a web page, without reloading the whole page.
 For security reasons, modern browsers do not allow access across domains. This means that both the web page and the XML file it tries to load, must be located on the same server.
 9. Scriptid body lõpus kiirendavad lehe laadimisaega - need laetakse viimasena.
