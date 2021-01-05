@@ -4,7 +4,6 @@
 4. Scope determines the accessibility (visibility) of variables. 
 Variables declared within a JavaScript function, become LOCAL to the function - local variables have Function scope: They can only be accessed from within the function. 
 Since local variables are only recognized inside their functions, variables with the same name can be used in different functions. Local variables are created when a function starts, and deleted when the function is completed.
-
 A variable declared outside a function, becomes GLOBAL - A global variable has global scope: All scripts and functions on a web page can access it. 
 5. https://www.javascripttutorial.net/es6/difference-between-var-and-let/
 6. ECMAScript on JS ametlik nimi. ECMAScript on European Computer Manufacturers Association (ECMA) poolt standardiseeritud JS keel. (JavaScript was invented by Brendan Eich in 1995 and became an ECMA standard in 1997. ECMAScript is the official name of the language.)
