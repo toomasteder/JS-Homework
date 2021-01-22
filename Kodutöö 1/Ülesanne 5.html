@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>1-5</title>
+</head>
+
+<body>
+    <b>Insert your number in range 1 to 10 and try your luck!</b> <br>
+    <form>
+        <div>
+            <input type="number" id="userInsertNum1" name="name">
+        </div>
+        <div>
+            <button type="button" onclick="numberGame()">TRY!</button>
+        </div>
+    </form>
+
+    <button onclick="numberGameReset()">Restart game</button> <br>
+
+    <!-- ajaxiga uuendan v'ljad? -->
+    <p id="triesLeft"></p>
+    <p id="points"></p>
+    <p id="currentLevel"></p>
+    <p id="userNumbersUsed"></p>
+
+    <script>
+        let triesLeft = 3;
+        let points = 0;
+        let currentLevel = 1;
+        // let userInsertNum = document.getElementById("userInsertNum").value;
+        let userNumbersUsed = ' ';
+        let ranNumBase = 10;
+        let randomNumber = Math.floor(Math.random() * ranNumBase) + 1;
+
+        // ajaxiga uuenda v'ljad
+        document.getElementById("triesLeft").innerHTML = "Tries left: " + triesLeft;
+        document.getElementById("points").innerHTML = "Points: " + points;
+        document.getElementById("currentLevel").innerHTML = "Current level: " + currentLevel;
+        document.getElementById("userNumbersUsed").innerHTML = "Numbers already used in this level: " + userNumbersUsed;
+
+        // siia funkts mis taastab mängu algseisu
+        function numberGameReset() {
+            triesLeft = 3;
+            points = 0;
+            currentLevel = 1;
+            ranNumBase = 10;
+        }
+
+        // numberGame funtsiooni seon sisestuskasti try nupuga. Lehte uuendad iga tsükli järel - Location reload() Method
+
+        
+        function numberGame() {
+            let userInsertNum = document.getElementById("userInsertNum1").value;
+            console.log(userInsertNum);
+            console.log("random " + randomNumber);
+            if (triesLeft > 0) {
+                if (userInsertNum > randomNumber) {
+                    triesLeft--;
+                    userNumbersUsed = userNumbersUsed + ' ' + userInsertNum;
+                    console.log("Inserted number is too big!");
+                } else if (userInsertNum < randomNumber) {
+                    triesLeft--;
+                    userNumbersUsed = userNumbersUsed + ' ' + userInsertNum;
+                    console.log("Inserted number is too small!");
+                } else if (userInsertNum === randomNumber) {
+                    points++;
+                    console.log("Points" + points)
+                    currentLevel++;
+                    triesLeft = 3;
+                    Console.log("Super!!!");
+                    ranNumBase = ranNumBase + 10;
+                    randomNumber = Math.floor(Math.random() * ranNumBase) + 1;
+                }
+            } else {
+                console.log("Game over!")
+            }
+
+
+
+
+
+        }
+
+        // function numberGame() {
+        //     console.log("random " + randomNumber);
+
+        //     let userInsertNum = document.getElementById("userInsertNum1").value;
+        //     console.log(userInsertNum);
+        //     while (triesLeft > 0) {
+
+        //         if (userInsertNum > randomNumber) {
+        //             triesLeft--;
+        //             userNumbersUsed = userNumbersUsed + ' ' + userInsertNum;
+        //             console.log("Inserted number is too big!");
+        //         } else if (userInsertNum < randomNumber) {
+        //             triesLeft--;
+        //             userNumbersUsed = userNumbersUsed + ' ' + userInsertNum;
+        //             console.log("Inserted number is too small!");
+        //         } else if (userInsertNum === randomNumber) {
+        //             points++;
+        //             currentLevel++;
+        //             triesLeft = 3;
+        //             Console.log("Super!!!");
+        //             ranNumBase = ranNumBase + 10;
+        //             randomNumber = Math.floor(Math.random() * ranNumBase) + 1;
+        //         }
+
+        //     }
+
+
+        // }
+
+        // function numberGame() {
+        //     do {
+        //         let randomNumber = Math.floor(Math.random() * ranNumBase) + 1;
+        //         console.log(randomNumber);
+        //         let userInsertNum = document.getElementById("userInsertNum1").value;
+        //         console.log(userInsertNum);
+
+        //         if (userInsertNum > randomNumber) {
+        //             triesLeft--;
+        //             userNumbersUsed = userNumbersUsed + ' ' + userInsertNum;
+        //             console.log("Inserted number is too big!");
+        //         } else if (userInsertNum < randomNumber) {
+        //             triesLeft--;
+        //             userNumbersUsed = userNumbersUsed + ' ' + userInsertNum;
+        //             console.log("Inserted number is too small!");
+        //         } else if (userInsertNum === randomNumber) {
+        //             points++;
+        //             currentLevel++;
+        //             triesLeft = 3;
+        //             Console.log("Super!!!");
+        //             ranNumBase = ranNumBase + 10;
+        //         }
+
+        //     } while (triesLeft > 0);
+
+
+        // }
+
+    </script>
+
+
+
+</body>
+
+</html>

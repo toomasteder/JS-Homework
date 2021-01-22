@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>1-6</title>
+</head>
+
+<body>
+    <script>
+        // let table = '';
+        // let i = 1
+        // for (let a = 1; a < 10; a++) {
+        //     if (i < 10) {
+        //         table = table + i;
+        //         i++;
+        //         console.log(table);
+        //     }
+        //     else {
+        //         table = table + i;
+        //         i--;
+        //         console.log(table);
+        //     }
+        // }
+        // console.log(table)
+
+
+        // let table = '';
+        // let i = 1;
+        // let counter = 0;
+        // if (counter < 3) {
+        //     for (let a = 1; a < 10; a++) {
+        //         if (i < 10) {
+        //             table = table + i;
+        //             i++;
+        //             console.log(table);
+        //         }
+        //     }
+        //     if (i > 0) {
+        //         table = table - i;
+        //         i--;
+        //     }
+        //     counter++;
+        //     console.log(counter);
+        // }
+
+        let table = '';
+        let i = 1;
+        let counter = 0, countup = true;
+        while (counter < 3) {
+            if (i < 10) {
+                table = table + i;
+                i++;
+                console.log(table);
+            }
+            if (i > 0) {
+                table = table - i;
+                i--;
+                console.log(table);
+            }
+            counter++;
+            console.log(counter);
+        }
+
+        // LK Lahendus
+
+        // const tips = 3; // Kolmnurga tippude arv
+        // let finalOutput = ''; // Lõplik string, mis konsooli prinditakse
+        // let row = '';
+        // let cycles = 0;
+        // let num = 1;
+        // let countUp = true; // Muutuja, mis defineerib kas number suureneb või väheneb
+
+        // // Tsükkel käib kuni soovitud arv kolmnurki valmis 
+        // while (cycles <= tips) {
+
+        //     row = countUp ? row + num : row.substring(0, row.length - 1); // countUp == true lisab reale numbri, teisel juhul eemaldab rea viimase numbri
+        //     finalOutput += row + '\n'; // Lisab rea lõplikusse stringi
+
+        //     if (num === 1) {
+        //         cycles++; // Suurendame tsüklite muutujat
+        //         countUp = true; // Hakkame numbreid ülespoole loendama
+        //     } else if (num === 9) {
+        //         countUp = false; // Hakkame numbreid allapoole loendama
+        //     }
+
+        //     num = countUp ? num + 1 : num - 1; // Number suureneb või väheneb vastavalt countUp muutujale
+        // }
+
+        // console.log(finalOutput);
+    
+    </script>
+
+</body>
+
+</html>
