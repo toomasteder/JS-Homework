@@ -66,6 +66,9 @@
                     if (isNaN(heightSliderValue) && isNaN(weightSliderValue)) {
                         return false;
                     }
+                    else if ((typeof heightSliderValue === "boolean") || (typeof weightSliderValue === "boolean")) {
+                        return false;
+                    }
                     else {
                         heightIndicatorElement.innerText = `Pikkus ${heightSliderValue} cm`;
                         weightIndicatorElement.innerText = `Kehakaal ${weightSliderValue} kg`;
