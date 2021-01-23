@@ -37,51 +37,42 @@
 
         reloadRecentValuesFromLocalStorage();
 
-        document.getElementById('weight-slider').addEventListener('input', (event) => {
-            const currentWeight = parseFloat(event.target.value);
-            const currentHeight = heightRangeSliderElement.value;
+        heightRangeSliderElement.addEventListener('input', handleSliderInput);
+        weightRangeSliderElement.addEventListener('input', handleSliderInput);
 
-            weightIndicatorElement.innerText = "Kehakaal " + currentWeight + " kg";
-
-            calculateBMI(currentHeight, currentWeight);
-
-            persistSelection(heightRangeSliderElement.value, weightRangeSliderElement.value, calculationResultElement.innerText);
-        });
-
-        document.getElementById('height-slider').addEventListener('input', (event) => {
-            const currentHeight = parseFloat(event.target.value);
-            const currentWeight = weightRangeSliderElement.value;
-
-            heightIndicatorElement.innerText = "Pikkus " + currentHeight + " cm";
-
-            calculateBMI(currentHeight, currentWeight);
-
-            persistSelection(heightRangeSliderElement.value, weightRangeSliderElement.value, calculationResultElement.innerText);
-        });
+        function handleSliderInput() {
+            const currentWeight = parseFloat(weightRangeSliderElement.value);
+            const currentHeight = parseFloat(heightRangeSliderElement.value);
+            weightIndicatorElement.innerText = `Kehakaal ${currentWeight} kg`;
+            heightIndicatorElement.innerText = `Pikkus ${currentHeight} cm`;
+            persistSelection(heightRangeSliderElement.value, weightRangeSliderElement.value);
+            calculationResultElement.innerText = calculateBMI(currentHeight, currentWeight).toFixed(2);
+        };
 
         function calculateBMI(currentHeight, currentWeight) {
-            let BMI = (currentWeight / ((currentHeight / 100) * (currentHeight / 100)));
-            calculationResultElement.innerText = BMI.toFixed(2);
-            return 0;
+            return (currentWeight / ((currentHeight / 100) * (currentHeight / 100)));
         }
 
         function reloadRecentValuesFromLocalStorage() {
-            const valuesFromLocalstorage = localStorage.getItem('lastSelectedValues');
-            if (valuesFromLocalstorage !== null) {
-                const { heightSliderValue, weightSliderValue, calculationResultElementValue } = JSON.parse(valuesFromLocalstorage);
-                heightIndicatorElement.innerText = `Pikkus ${heightSliderValue} cm`;
-                weightIndicatorElement.innerText = `Kehakaal ${weightSliderValue} kg`;
-                calculationResultElement.innerText = calculationResultElementValue;
-                heightRangeSliderElement.value = heightSliderValue;
-                weightRangeSliderElement.value = weightSliderValue;
+            if (localStorage.getItem('lastSelectedValues') !== null) {
+                const valuesFromLocalstorage = localStorage.getItem('lastSelectedValues');
+                if (valuesFromLocalstorage.includes("heightSliderValue") && valuesFromLocalstorage.includes("weightSliderValue")) {
+                    const { heightSliderValue, weightSliderValue } = JSON.parse(valuesFromLocalstorage);
+                    heightIndicatorElement.innerText = `Pikkus ${heightSliderValue} cm`;
+                    weightIndicatorElement.innerText = `Kehakaal ${weightSliderValue} kg`;
+                    heightRangeSliderElement.value = heightSliderValue;
+                    weightRangeSliderElement.value = weightSliderValue;
+                    calculationResultElement.innerText = calculateBMI(heightSliderValue, weightSliderValue).toFixed(2);
+                }
+                return false;
             }
+
         }
 
-        function persistSelection(heightSliderValue, weightSliderValue, calculationResultElementValue) {
-            const lastSelectedValues = { heightSliderValue, weightSliderValue, calculationResultElementValue }
-            const values = JSON.stringify(lastSelectedValues);
-            localStorage.setItem('lastSelectedValues', values);
+        function persistSelection(heightSliderValue, weightSliderValue) {
+            localStorage.setItem('lastSelectedValues', JSON.stringify({ heightSliderValue, weightSliderValue }));
         }
+
     </script>
 </body>
 
