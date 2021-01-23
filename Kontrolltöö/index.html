@@ -45,25 +45,35 @@
             const currentHeight = parseFloat(heightRangeSliderElement.value);
             weightIndicatorElement.innerText = `Kehakaal ${currentWeight} kg`;
             heightIndicatorElement.innerText = `Pikkus ${currentHeight} cm`;
-            persistSelection(heightRangeSliderElement.value, weightRangeSliderElement.value);
+            persistSelection(currentHeight, currentWeight);
             calculationResultElement.innerText = calculateBMI(currentHeight, currentWeight).toFixed(2);
         };
 
         function calculateBMI(currentHeight, currentWeight) {
-            return (currentWeight / ((currentHeight / 100) * (currentHeight / 100)));
+            return (currentWeight / ((currentHeight / 100) ** 2));
         }
 
         function reloadRecentValuesFromLocalStorage() {
             if (localStorage.getItem('lastSelectedValues') !== null) {
                 const valuesFromLocalstorage = localStorage.getItem('lastSelectedValues');
                 if (valuesFromLocalstorage.includes("heightSliderValue") && valuesFromLocalstorage.includes("weightSliderValue")) {
+                    try {
+                        const { heightSliderValue, weightSliderValue } = JSON.parse(valuesFromLocalstorage);
+                    } catch (e) {
+                        return false;
+                    };
                     const { heightSliderValue, weightSliderValue } = JSON.parse(valuesFromLocalstorage);
-                    heightIndicatorElement.innerText = `Pikkus ${heightSliderValue} cm`;
-                    weightIndicatorElement.innerText = `Kehakaal ${weightSliderValue} kg`;
-                    heightRangeSliderElement.value = heightSliderValue;
-                    weightRangeSliderElement.value = weightSliderValue;
-                    calculationResultElement.innerText = calculateBMI(heightSliderValue, weightSliderValue).toFixed(2);
-                }
+                    if (isNaN(heightSliderValue) && isNaN(weightSliderValue)) {
+                        return false;
+                    }
+                    else {
+                        heightIndicatorElement.innerText = `Pikkus ${heightSliderValue} cm`;
+                        weightIndicatorElement.innerText = `Kehakaal ${weightSliderValue} kg`;
+                        heightRangeSliderElement.value = heightSliderValue;
+                        weightRangeSliderElement.value = weightSliderValue;
+                        calculationResultElement.innerText = calculateBMI(heightSliderValue, weightSliderValue).toFixed(2);
+                    };
+                };
                 return false;
             }
         }
